@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "name": "Finsi AI", 
+    "builds": [
+      {
+        "src": "main.py",
+        "use": "@vercel/python",
+        "config": {
+          "runtime": "python3.10", 
+          "dependencies": "requirements.txt"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "GeminiDiscordBot.py"
+      }
+    ]
+  }

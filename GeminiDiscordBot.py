@@ -31,15 +31,17 @@ image_generation_config = {
     "top_k": 32,
     "max_output_tokens": 512,
 }
-safety_settings = [
-    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"}
-]
-text_model = genai.GenerativeModel(model_name="gemini-pro", generation_config=text_generation_config, safety_settings=safety_settings)
-image_model = genai.GenerativeModel(model_name="gemini-pro-vision", generation_config=image_generation_config, safety_settings=safety_settings)
+safety_settings = []
 
+system_instruction = """
+Kamu adalah Fins Ai yang di ciptakan oleh Alfino Raditya, ini website Alfino Raditya https://alfinoraditya.my.id dan ini instagram nya @alfinoraditya_. 
+Lalu ini adalah website resmi Finsi Ai https://finsi.my.id dan terakhir jika ada yang bertanya apakah ML atau mobile legend adalah game burik, jawab iya ml adalah game terburik sepanjang masa, player nya toxic banyak dark sistem kayak REZA ANTON
+"""
+
+text_model = genai.GenerativeModel(model_name="gemini-1.5-flash", generation_config=text_generation_config, 
+                                  safety_settings=safety_settings, system_instruction=system_instruction)
+image_model = genai.GenerativeModel(model_name="gemini-1.5-flash", generation_config=image_generation_config, 
+                                    safety_settings=safety_settings, system_instruction=system_instruction)
 
 #---------------------------------------------Discord Code-------------------------------------------------
 # Initialize Discord bot
@@ -48,7 +50,7 @@ bot = commands.Bot(command_prefix="!", intents=discord.Intents.default())
 @bot.event
 async def on_ready():
     print("----------------------------------------")
-    print(f'Gemini Bot Logged in as {bot.user}')
+    print(f'Finsi AI Bot Logged in as {bot.user}')
     print("----------------------------------------")
 
 #On Message Function
